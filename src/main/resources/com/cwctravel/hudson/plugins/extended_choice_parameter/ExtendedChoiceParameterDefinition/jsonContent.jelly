@@ -29,7 +29,7 @@
 		  document.getElementById("editor_${it.name}_value").value = JSON.stringify(editor_${normalizedParameterName}.getValue());
 	  });
 
-	  editor_${normalizedParameterName}.element.onkeyup = function(b){
+	  editor_${normalizedParameterName}.element.onkeyup = function(b) {
       	if(b.srcElement.name) {
       		var path = b.srcElement.name.replace(/[\[\] root]/g, ' ')
       			.split(' ')
@@ -38,7 +38,7 @@
       			})
       			.join('.');
 
-      		var param = JSON.parse(document.getElementById('editor_${normalizedParameterName}_value').value);
+      		var param = JSON.parse(document.getElementById("editor_${normalizedParameterName}_value").value);
       		setToValue(param, b.target.value, path);
       		editor_${normalizedParameterName}.setValue(param);
       	}
