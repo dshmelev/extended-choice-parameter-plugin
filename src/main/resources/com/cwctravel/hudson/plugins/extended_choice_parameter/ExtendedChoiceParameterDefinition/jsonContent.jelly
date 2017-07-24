@@ -28,6 +28,34 @@
       editor_${normalizedParameterName}.on('change',function() {
 		  document.getElementById("editor_${it.name}_value").value = JSON.stringify(editor_${normalizedParameterName}.getValue());
 	  });
+
+	  editor_${normalizedParameterName}.element.onkeyup = function(b) {
+      	if(b.srcElement.name) {
+      		var path = b.srcElement.name.replace(/[\[\] root]/g, ' ')
+      			.split(' ')
+      			.filter(function(e){
+      				return e
+      			})
+      			.join('.');
+
+      		var param = JSON.parse(document.getElementById("editor_${normalizedParameterName}_value").value);
+      		setToValue(param, b.target.value, path);
+      		editor_${normalizedParameterName}.setValue(param);
+      	}
+
+      };
+
+      function setToValue(obj, value, path) {
+      	var i;
+      	path = path.split('.');
+      	for (i = 0; i < path.length - 1; i++){
+      		obj[path[i]] = obj[path[i]] || {};
+      		obj = obj[path[i]];
+      	}
+
+      	obj[path[i]] = value;
+      	return obj;
+      }
 	  
 	  <j:if test="${not empty theme}">
 	   (function() {
