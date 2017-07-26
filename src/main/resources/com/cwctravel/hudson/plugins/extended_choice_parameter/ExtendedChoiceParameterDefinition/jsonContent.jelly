@@ -38,9 +38,10 @@
       			})
       			.join('.');
 
-      		var param = JSON.parse(document.getElementById("editor_${normalizedParameterName}_value").value);
+            var hiddenInput = document.getElementById("editor_${normalizedParameterName}_value");
+      		var param = JSON.parse(hiddenInput.value);
       		setToValue(param, b.target.value, path);
-      		editor_${normalizedParameterName}.setValue(param);
+      		hiddenInput.value = JSON.stringify(param);
       	}
 
       };
